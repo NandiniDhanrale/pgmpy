@@ -345,8 +345,8 @@ class JointProbabilityDistribution(DiscreteFactor):
         ...     values=np.ones(12) / 12,
         ... )
         >>> prob_copy = prob.copy()
-        >>> (prob_copy.values == prob.values).all()
-        np.True_
+        >>> bool((prob_copy.values == prob.values).all())
+        True
         >>> prob_copy.variables == prob.variables
         True
         >>> prob_copy.variables[1] = "y"
@@ -375,8 +375,9 @@ class JointProbabilityDistribution(DiscreteFactor):
         ...     values=np.ones(12) / 12,
         ... )
         >>> bayesian_model = prob.minimal_imap(order=["x2", "x1", "x3"])
-        >>> bayesian_model
-        <pgmpy.models.DiscreteBayesianNetwork.DiscreteBayesianNetwork object at 0x...>
+        >>> from pgmpy.models import DiscreteBayesianNetwork
+        >>> isinstance(bayesian_model, DiscreteBayesianNetwork)
+        True
         >>> bayesian_model.edges()
         OutEdgeView([('x2', 'x3'), ('x1', 'x3')])
         """
